@@ -1,0 +1,42 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+fail_fast: true
+repos:
+  - repo: local
+    hooks:
+    - id: php-parallel-lint
+      name: php-parallel-lint
+      entry: vendor/bin/parallel-lint
+      language: system
+      types: [php]
+  - repo: https://github.com/digitalpulp/pre-commit-php.git
+    rev: 1.4.0
+    hooks:
+      - id: php-cs-fixer
+        stages: [commit]
+  - repo: https://github.com/digitalpulp/pre-commit-php.git
+    rev: 1.4.0
+    hooks:
+      - id: php-cs-fixer
+        args: [-v, --dry-run, --stop-on-violation, --using-cache=no]
+        stages: [push, merge-commit]
+  - repo: https://github.com/digitalpulp/pre-commit-php.git
+    rev: 1.4.0
+    hooks:
+      - id: php-cbf
+        stages: [commit]
+  - repo: https://github.com/digitalpulp/pre-commit-php.git
+    rev: 1.4.0
+    hooks:
+      - id: php-cs
+  - repo: https://github.com/digitalpulp/pre-commit-php.git
+    rev: 1.4.0
+    hooks:
+      - id: php-stan
+        args: [--memory-limit=-1]
+  - repo: https://github.com/digitalpulp/pre-commit-php.git
+    rev: 1.4.0
+    hooks:
+      - id: php-unit
+        stages: [push, merge-commit]

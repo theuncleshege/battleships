@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<ruleset name="TheUncleShege Coding Standard">
+
+  <config name="default_standard" value="PSR12"/>
+  <config name="tab_width" value="4"/>
+  <config name="colors" value="1"/>
+  <config name="php_version" value="70410"/>
+
+  <arg name="standard" value="PSR12" />
+  <arg name="extensions" value="php,inc" />
+  <arg name="tab-width" value="4" />
+  <arg name="colors" />
+  <arg value="ps" />
+
+  <file>./app/</file>
+  <file>./tests/</file>
+
+  <exclude-pattern>*/\.*/*</exclude-pattern>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/autoload.php</exclude-pattern>
+
+  <rule ref="PSR12">
+    <properties>
+      <property name="lineLimit" value="80"/>
+      <property name="absoluteLineLimit" value="80"/>
+    </properties>
+  </rule>
+
+  <rule
+    ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
+    <exclude
+      name="SlevomatCodingStandard.Classes.ClassStructure.IncorrectGroupOrder"/>
+    <exclude
+      name="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces.NoEmptyLineAfterOpeningBrace"/>
+    <exclude
+      name="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces.NoEmptyLineBeforeClosingBrace"/>
+    <exclude
+      name="SlevomatCodingStandard.Classes.ParentCallSpacing.IncorrectLinesCountBeforeControlStructure"/>
+    <exclude
+      name="SlevomatCodingStandard.Classes.RequireSingleLineMethodSignature.RequiredSingleLineSignature"/>
+    <exclude
+      name="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment.OneLinePropertyComment"/>
+    <exclude
+      name="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing.IncorrectLinesCountBeforeControlStructure"/>
+    <exclude
+      name="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing.IncorrectLinesCountAfterLastControlStructure"/>
+    <exclude
+      name="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses.UsedWithParentheses"/>
+    <exclude
+      name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses.UselessParentheses"/>
+    <exclude
+      name="SlevomatCodingStandard.ControlStructures.RequireYodaComparison.RequiredYodaComparison"/>
+    <exclude
+      name="SlevomatCodingStandard.Files.LineLength.LineTooLong"/>
+    <exclude
+      name="SlevomatCodingStandard.Files.TypeNameMatchesFileName.NoMatchBetweenTypeNameAndFileName"/>
+    <exclude
+      name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions.NonFullyQualified"/>
+    <exclude
+      name="SlevomatCodingStandard.Namespaces.FullyQualifiedExceptions.NonFullyQualifiedException"/>
+    <exclude
+      name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces.NonFullyQualified"/>
+    <exclude
+      name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectWhitespaceBetweenOpenTagAndDeclare"/>
+    <exclude
+      name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectStrictTypesFormat"/>
+  </rule>
+
+</ruleset>

@@ -1,0 +1,33 @@
+composer.phar
+/vendor/
+
+# User-specific JetBrains IDE stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+# Generated files
+.idea/**/contentModel.xml
+
+# Visual Studio Config
+/.vscode/settings.json
+
+# OSX Attributes
+/.DS_Store/
+
+# PHP Coding Standards Fixer Config and Cache
+.php_cs
+.php_cs.cache
+
+# PHPStan Config
+phpstan.neon
+
+# PHPUnit Result Cache
+.phpunit.result.cache
+
+# PHPUnit Coverage
+/coverage/
+
+# Temp
+/tmp/
