@@ -7,15 +7,15 @@ namespace App\Models;
 use App\Exceptions\CannotPlaceShip;
 use App\Helpers\GameProcessor;
 use App\Helpers\GameRunner\GameRunner;
-use App\Helpers\Renderer\ConsoleRenderer;
+use App\Helpers\Renderer\Renderer;
 use App\Helpers\ShipPlacement\ShipPlacement;
-use App\Helpers\Validator\InputValidator;
 
 final class Game
 {
     private Board $board;
     private ShipPlacement $shipPlacement;
     private int $shotsTaken = 0;
+    private Renderer $renderer;
 
     public function __construct(Board $board, ShipPlacement $shipPlacement)
     {
@@ -23,17 +23,22 @@ final class Game
         $this->shipPlacement = $shipPlacement;
     }
 
-    public function startGame(GameRunner $gameRunner): void
-    {
+    public function startGame(
+        GameRunner $gameRunner,
+        GameProcessor $gameProcessor
+    ): void {
         try {
             $this->shipPlacement->placeShipsOnBoard($this->board);
-
-            $gameProcessor = new GameProcessor(new InputValidator());
-            $gameRunner->run($gameProcessor, new ConsoleRenderer($this));
+            $gameRunner->run($gameProcessor, $this->renderer);
         } catch (CannotPlaceShip $e) {
             echo $e->getMessage() . "\n\n";
             exit();
         }
+    }
+
+    public function setRenderer(Renderer $renderer): void
+    {
+        $this->renderer = $renderer;
     }
 
     public function getBoard(): Board

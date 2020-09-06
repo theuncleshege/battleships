@@ -13,7 +13,6 @@ final class GameProcessor
 {
     public const HANDLE_RESULT_HIT = 'Hit';
     public const HANDLE_RESULT_MISS = 'Miss';
-    public const HANDLE_RESULT_ERROR = 'Error';
     public const HANDLE_RESULT_SUNK = 'Sunk';
     public const HANDLE_GAME_OVER = 'Game Over';
 
@@ -27,7 +26,7 @@ final class GameProcessor
     public function processInput(Game $game, string $input): string
     {
         if (!$this->inputValidator->isValid($input)) {
-            return self::HANDLE_RESULT_ERROR;
+            return $this->inputValidator->getErrorMessage();
         }
 
         $game->incrementShotsTaken();

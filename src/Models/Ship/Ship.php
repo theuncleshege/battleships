@@ -15,21 +15,10 @@ abstract class Ship
 
     abstract public function getSize(): int;
 
-    /** @return array<\App\Models\Target> */
-    final public function getTargets(): array
-    {
-        return $this->targets;
-    }
-
     /** @param array<\App\Models\Target> $targets */
     final public function setTargets(array $targets): void
     {
         $this->targets = $targets;
-    }
-
-    final public function getShots(): int
-    {
-        return $this->shots;
     }
 
     final public function incrementShots(): void

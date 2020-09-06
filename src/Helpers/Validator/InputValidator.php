@@ -6,27 +6,23 @@ namespace App\Helpers\Validator;
 
 final class InputValidator implements Validator
 {
-    public const INVALID_INPUT_GIVEN = 'Invalid input. Please try again.';
-
-    private string $errorMessage = '';
+    private string $errorMessage = 'Invalid input. Please try again.';
 
     public function isValid(string $input): bool
     {
-        if (strlen($input) !== 2) {
-            $this->errorMessage = self::INVALID_INPUT_GIVEN;
+        if (strlen($input) < 2 || strlen($input) > 3) {
             return false;
         }
 
         if (!ctype_alpha(substr($input, 0, 1))) {
-            $this->errorMessage = self::INVALID_INPUT_GIVEN;
             return false;
         }
 
         if (!ctype_digit(substr($input, 1, 2))) {
-            $this->errorMessage = self::INVALID_INPUT_GIVEN;
             return false;
         }
 
+        $this->errorMessage = '';
         return true;
     }
 

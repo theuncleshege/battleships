@@ -54,7 +54,7 @@ final class ConsoleRenderer extends Renderer
         echo $this->newLine;
 
         if ($result === GameProcessor::HANDLE_GAME_OVER) {
-            $this->renderGameOver($this->game);
+            $this->renderGameOver();
         } else {
             echo 'Enter coordinates (row, col), e.g. A5 = ';
         }
@@ -75,11 +75,11 @@ final class ConsoleRenderer extends Renderer
         echo $this->newLine;
     }
 
-    private function renderGameOver(Game $game): void
+    private function renderGameOver(): void
     {
         echo sprintf(
             'Well done! You completed the game in %d shots',
-            $game->getShotsTaken(),
+            $this->game->getShotsTaken(),
         );
         echo $this->newLine;
     }

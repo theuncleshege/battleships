@@ -26,15 +26,15 @@ final class ConsoleGameRunner implements GameRunner
         $renderer->render($result, $isCheatMode);
 
         while (true) {
+            $result = '';
             $rawInput = $stdin !== false ? fgets($stdin) : false;
             $input = $rawInput !== false ? trim($rawInput) : '';
 
             if ($input === 'show') {
-                $input = '';
                 $isCheatMode = true;
             }
 
-            if ($input !== '') {
+            if ($input !== '' && !$isCheatMode) {
                 $result = $gameProcessor->processInput($this->game, $input);
             }
 
