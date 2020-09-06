@@ -35,7 +35,7 @@ final class RandomShipPlacement implements ShipPlacement
                 $retries += 1
             ) {
                 $direction =
-                    rand(0, 1) === 0
+                    $this->rand(0, 1) === 0
                         ? ShipPlacement::DIRECTION_VERTICAL
                         : ShipPlacement::DIRECTION_HORIZONTAL;
 
@@ -57,6 +57,15 @@ final class RandomShipPlacement implements ShipPlacement
 
         return true;
     }
+
+    // @codeCoverageIgnoreStart
+    // @phpstan-ignore-next-line
+    protected function rand(int $start, int $end): int
+    {
+        return rand($start, $end);
+    }
+
+    // @codeCoverageIgnoreEnd
 
     private function placeShipOnBoardWithDirection(
         Ship $ship,
@@ -83,7 +92,8 @@ final class RandomShipPlacement implements ShipPlacement
         return $startPosition + $shipSize <= Board::SIZE;
     }
 
-    private function areTargetsAvailable(
+    // @phpstan-ignore-next-line
+    protected function areTargetsAvailable(
         int $startPosition,
         string $direction
     ): bool {

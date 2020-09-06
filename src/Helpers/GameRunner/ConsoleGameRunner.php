@@ -21,13 +21,13 @@ final class ConsoleGameRunner implements GameRunner
     {
         $isCheatMode = false;
         $result = '';
-        $stdin = fopen('php://stdin', 'r');
+        $stdin = $this->fopen('php://stdin', 'r');
 
         $renderer->render($result, $isCheatMode);
 
         while (true) {
             $result = '';
-            $rawInput = $stdin !== false ? fgets($stdin) : false;
+            $rawInput = $stdin !== false ? $this->fgets($stdin) : false;
             $input = $rawInput !== false ? trim($rawInput) : '';
 
             if ($input === 'show') {
@@ -46,4 +46,23 @@ final class ConsoleGameRunner implements GameRunner
             }
         }
     }
+
+    // @codeCoverageIgnoreStart
+    /** @return resource|false a file pointer resource on success, or false on error. */
+    // @phpstan-ignore-next-line
+    protected function fopen(string $filename, string $mode)
+    {
+        return fopen($filename, $mode);
+    }
+
+    /**
+     * @param resource $handle
+     * @return string|false
+     */
+    // @phpstan-ignore-next-line
+    protected function fgets($handle)
+    {
+        return fgets($handle);
+    }
+    // @codeCoverageIgnoreEnd
 }

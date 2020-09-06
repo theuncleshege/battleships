@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Helpers\Validator;
 
+use App\Models\Board;
+
 final class InputValidator implements Validator
 {
     private string $errorMessage = 'Invalid input. Please try again.';
@@ -18,7 +20,9 @@ final class InputValidator implements Validator
             return false;
         }
 
-        if (!ctype_digit(substr($input, 1, 2))) {
+        $number = substr($input, 1, 2);
+
+        if (!ctype_digit($number) || $number > Board::SIZE) {
             return false;
         }
 

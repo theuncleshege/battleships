@@ -19,6 +19,24 @@ final class BoardTest extends TestCase
     /** @var array<\App\Models\Ship\Ship> */
     private array $ships;
 
+    public function testBoardWillThrowExceptionOnShipsLimitExceeded(): void
+    {
+        self::expectException(CannotInitializeBoard::class);
+
+        $this->ships[] = $this->createMock(BattleShip::class);
+
+        new Board($this->ships);
+    }
+
+    public function testBoardWillThrowExceptionOnZeroShips(): void
+    {
+        self::expectException(CannotInitializeBoard::class);
+
+        $this->ships = [];
+
+        new Board($this->ships);
+    }
+
     public function testBoardCanGetTargets(): void
     {
         $targets = $this->board->getTargets();
@@ -37,27 +55,13 @@ final class BoardTest extends TestCase
         self::assertInstanceOf(Ship::class, array_pop($array));
     }
 
-    public function testBoardWillThrowExceptionOnShipsLimitExceeded(): void
-    {
-        self::expectException(CannotInitializeBoard::class);
-
-        $this->ships[] = new BattleShip();
-
-        new Board($this->ships);
-    }
-
-    public function testBoardWillThrowExceptionOnZeroShips(): void
-    {
-        self::expectException(CannotInitializeBoard::class);
-
-        $this->ships = [];
-
-        new Board($this->ships);
-    }
-
     protected function setUp(): void
     {
-        $this->ships = [new BattleShip(), new Destroyer(), new Destroyer()];
+        $this->ships = [
+            $this->createMock(BattleShip::class),
+            $this->createMock(Destroyer::class),
+            $this->createMock(Destroyer::class),
+        ];
         $this->board = new Board($this->ships);
     }
 }
