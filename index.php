@@ -10,13 +10,13 @@ use App\Helpers\ShipPlacement\RandomShipPlacement;
 use App\Helpers\Validator\InputValidator;
 use App\Models\Board;
 use App\Models\Game;
+use App\Models\Ship\BattleShip;
 use App\Models\Ship\Destroyer;
 
 require __DIR__ . '/vendor/autoload.php';
 
 try {
-    //    $ships = [new BattleShip(), new Destroyer(), new Destroyer()];
-    $ships = [new Destroyer()];
+    $ships = [new BattleShip(), new Destroyer(), new Destroyer()];
     $board = new Board($ships);
     $shipPlacement = new RandomShipPlacement(5);
 
