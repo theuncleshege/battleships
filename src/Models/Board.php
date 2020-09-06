@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Models;
+namespace App\Models;
 
-use App\Exceptions\CannotPlaceShip;
+use App\Exceptions\CannotInitializeBoard;
 
 final class Board
 {
     public const SIZE = 10;
     public const MAX_NUMBER_OF_SHIPS = 3;
 
-    /** @var array<\App\Data\Models\Target> */
+    /** @var array<\App\Models\Target> */
     private array $targets;
 
-    /** @var array<\App\Data\Models\Ship\Ship> */
+    /** @var array<\App\Models\Ship\Ship> */
     private array $ships;
 
     /**
-     * @param array<\App\Data\Models\Ship\Ship> $ships
-     * @throws \App\Exceptions\CannotPlaceShip
+     * @param array<\App\Models\Ship\Ship> $ships
+     * @throws \App\Exceptions\CannotInitializeBoard
      */
     public function __construct(array $ships)
     {
@@ -27,7 +27,7 @@ final class Board
             $errorMessage =
                 'There must be at least 1 ship on this board. ' .
                 'Please check your input and try again.';
-            throw new CannotPlaceShip($errorMessage);
+            throw new CannotInitializeBoard($errorMessage);
         }
 
         if (count($ships) > self::MAX_NUMBER_OF_SHIPS) {
@@ -36,13 +36,11 @@ final class Board
                 self::MAX_NUMBER_OF_SHIPS .
                 ' ships on this board. Please check your input ' .
                 ' and try again.';
-            throw new CannotPlaceShip($errorMessage);
+            throw new CannotInitializeBoard($errorMessage);
         }
 
         $this->ships = $ships;
         $this->initializeBoard();
-
-        var_dump($this->targets, $this->ships);
     }
 
     private function initializeBoard(): void
@@ -55,23 +53,15 @@ final class Board
                 $this->targets[$targetName] = new Target($targetName);
             }
         }
-
-        //        for ($row = 1; $row <= self::SIZE; $row += 1) {
-        //            $rowLetter = $this->getGridLetterByIndex($row);
-        //
-        //            for ($column = 1; $column <= self::SIZE; $column += 1) {
-        //                $this->grid[$rowLetter][$column] = null;
-        //            }
-        //        }
     }
 
-    /** @return array<array<string>> */
+    /** @return array<\App\Models\Target> */
     public function getTargets(): array
     {
         return $this->targets;
     }
 
-    /** @return array<\App\Data\Models\Ship> */
+    /** @return array<\App\Models\Ship\Ship> */
     public function getShips(): array
     {
         return $this->ships;

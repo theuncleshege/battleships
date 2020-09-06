@@ -5,3 +5,8 @@ parameters:
     - %currentWorkingDirectory%/tests
   excludes_analyse:
     - vendor
+  ergebnis:
+  		classesAllowedToBeExtended:
+  			- Exception
+  			- App\Models\Ship\Ship
+  			- App\Helpers\Renderer\Renderer

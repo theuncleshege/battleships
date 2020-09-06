@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Helpers\ShipPlacement;
 
-use App\Data\Models\Board;
+use App\Models\Board;
 
 interface ShipPlacement
 {

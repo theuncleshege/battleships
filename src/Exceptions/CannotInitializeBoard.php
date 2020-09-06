@@ -6,6 +6,6 @@ namespace App\Exceptions;
 
 use Exception;
 
-final class CannotPlaceShip extends Exception
+final class CannotInitializeBoard extends Exception
 {
 }

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Helpers\ShipPlacement;
 
-use App\Data\Models\Board;
-use App\Data\Models\Ship\Ship;
-use App\Data\Models\Target;
 use App\Exceptions\CannotPlaceShip;
+use App\Models\Board;
+use App\Models\Ship\Ship;
+use App\Models\Target;
 
 final class RandomShipPlacement implements ShipPlacement
 {
     private int $maxNumberOfRetries;
 
-    /** @var array<\App\Data\Models\Target> */
+    /** @var array<\App\Models\Target> */
     private array $targets;
 
     public function __construct(int $numberOfRetries)
@@ -38,8 +38,6 @@ final class RandomShipPlacement implements ShipPlacement
                     rand(0, 1) === 0
                         ? ShipPlacement::DIRECTION_VERTICAL
                         : ShipPlacement::DIRECTION_HORIZONTAL;
-
-                echo 'USING DIRECTION :: ' . $direction . "\n\n";
 
                 if ($this->placeShipOnBoardWithDirection($ship, $direction)) {
                     $areShipsPlaced = true;
@@ -131,7 +129,8 @@ final class RandomShipPlacement implements ShipPlacement
         for ($i = $startPosition; $i < $startPosition + $shipSize; $i += 1) {
             $target = $this->getCurrentTarget($startPosition, $direction, $i);
 
-            $target->setIsOccupied(true);
+            $target->setIsOccupied();
+            $target->setShip($ship);
             $shipTargets[$target->getName()] = $target;
         }
 

@@ -2,21 +2,24 @@
 
 declare(strict_types=1);
 
-use App\Data\Models\Board;
-use App\Data\Models\Ship\Destroyer;
-use App\Exceptions\CannotPlaceShip;
+use App\Exceptions\CannotInitializeBoard;
+use App\Helpers\GameRunner\ConsoleGameRunner;
 use App\Helpers\ShipPlacement\RandomShipPlacement;
+use App\Models\Board;
+use App\Models\Game;
+use App\Models\Ship\BattleShip;
+use App\Models\Ship\Destroyer;
 
 require __DIR__ . '/vendor/autoload.php';
 
 try {
-    $destroyer = new Destroyer();
-    $ships = [$destroyer];
+    $ships = [new BattleShip(), new Destroyer(), new Destroyer()];
     $board = new Board($ships);
     $shipPlacement = new RandomShipPlacement(5);
 
-    var_dump($shipPlacement->placeShipsOnBoard($board));
-    var_dump($destroyer->getTargets());
-} catch (CannotPlaceShip $e) {
+    $game = new Game($board, $shipPlacement);
+    $gameRunner = new ConsoleGameRunner($game);
+    $game->startGame($gameRunner);
+} catch (CannotInitializeBoard $e) {
     echo $e->getMessage() . "\n\n";
 }

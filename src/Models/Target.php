@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Models;
+namespace App\Models;
+
+use App\Models\Ship\Ship;
 
 final class Target
 {
     private string $name;
     private bool $isOccupied = false;
     private bool $isHit = false;
+    private Ship $ship;
 
     public function __construct(string $name)
     {
@@ -25,9 +28,9 @@ final class Target
         return $this->isOccupied;
     }
 
-    public function setIsOccupied(bool $isOccupied): void
+    public function setIsOccupied(): void
     {
-        $this->isOccupied = $isOccupied;
+        $this->isOccupied = true;
     }
 
     public function isHit(): bool
@@ -35,8 +38,18 @@ final class Target
         return $this->isHit === true;
     }
 
-    public function setIsHit(bool $isHit): void
+    public function setIsHit(): void
     {
-        $this->isHit = $isHit;
+        $this->isHit = true;
+    }
+
+    public function getShip(): Ship
+    {
+        return $this->ship;
+    }
+
+    public function setShip(Ship $ship): void
+    {
+        $this->ship = $ship;
     }
 }

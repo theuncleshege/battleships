@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Models\Ship;
+namespace App\Models\Ship;
 
-final class BattleShip extends Ship
+final class Destroyer extends Ship
 {
     public function getName(): string
     {
-        return 'BattleShip';
+        return 'Destroyer';
     }
 
     public function getSize(): int
     {
-        return 5;
+        return 2;
     }
 }
